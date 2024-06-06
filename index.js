@@ -23,7 +23,7 @@ const apiKey = "44245145-3992e974edb390e4edf38875e";
                   <img src="${image.webformatURL}" alt="${image.tags}">
                 </div>
               `;
-              imageContainer.innerHTML + imageElement;
+              imageContainer.innerHTML += imageElement;
             });
           } else {
             const messageElement = document.createElement("p");
