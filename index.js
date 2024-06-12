@@ -1,5 +1,5 @@
 const apiKey = "44245145-3992e974edb390e4edf38875e"; 
-let query = ""; // Додано пустий рядок для початкового значення запиту
+let query = ""; 
 let currentPage = 1;
 const perPage = 15;
 
@@ -29,7 +29,13 @@ function getImages(page) {
           `;
           imageContainer.innerHTML += imageElement;
         });
-        addImageClickEvent();
+        const images = document.querySelectorAll(".image-wrapper img");
+        images.forEach((image) => {
+          image.addEventListener("click", () => {
+            modalImage.src = image.src;
+            modal.classList.add("active");
+          });
+        });
       } else {
         const messageElement = document.createElement("p");
         messageElement.textContent = "На жаль, (більше) зображень за вашим запитом не знайдено. Обновіть сторінку щоб спробувати ще раз.";
@@ -41,24 +47,14 @@ function getImages(page) {
     });
 }
 
-function addImageClickEvent() {
-  const images = document.querySelectorAll(".image-wrapper img");
-  images.forEach((image) => {
-    image.addEventListener("click", () => {
-      modalImage.src = image.src;
-      modal.classList.add("active");
-    });
-  });
-}
-
 modal.addEventListener("click", () => {
   modal.classList.remove("active");
 });
 
 searchButton.addEventListener("click", () => {
   query = searchInput.value;
-  imageContainer.innerHTML = ""; // Очищення контейнера з зображеннями
-  currentPage = 1; // Скидання номера сторінки
+  imageContainer.innerHTML = ""; 
+  currentPage = 1; 
   getImages(currentPage);
 });
 
